@@ -36,7 +36,7 @@ active_encodings = {}
 class EncodingStats:
     percent: float = 0.0
     fps: float = 0.0
-    bitrate: str = "N/A"
+    bitrat: str = "N/A"
     speed: str = "N/A"
     frame: int = 0
     total_frames: int = 0
@@ -174,8 +174,8 @@ class FFmpegProcess:
                 self.stats.frame = int(value)
             elif key == "fps":
                 self.stats.fps = float(value)
-            elif key == "bitrate":
-                self.stats.bitrate = value
+            elif key == "bitrat":
+                self.stats.bitrat = value
             elif key == "speed":
                 self.stats.speed = value
             elif key == "out_time_us":
@@ -251,7 +251,7 @@ class FFmpegProcess:
             f"<blockquote>📊 <b>Performance Stats</b> 🚀\n"
             f"┣ <b>🎥 Video FPS:</b> 24.0 (original)\n"
             f"┣ <b>⚡ Encoding:</b> {self.stats.fps:.1f} fps\n"
-            f"┣ <b>✨ Quality:</b> {self.stats.bitrate}\n"
+            f"┣ <b>✨ Quality:</b> {self.stats.bitrat}\n"
             f"┗ <b>📈 Frames:</b> {self.stats.frame}</blockquote>\n\n"
             f"<blockquote>💾 <b>File Information</b>\n"
             f"┣ <b>📥 Input:</b> {self.stats.size}\n"
