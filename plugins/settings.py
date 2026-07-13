@@ -18,7 +18,7 @@ log = LOGGER(__name__)
 # Default Settings
 DEFAULT_SETTINGS = {
     "video": {"crf": "46", "preset": "6", "resolution": ["720p"], "codec": "libsvt-av1"},
-    "audio": {"bitrate": "128k"},
+    "audio": {"bitrat": "128k"},
     "metadata": {
         "global": {"title": "Auto Encoded", "author": "AutoAnimePro"},
         "video": {},
@@ -80,7 +80,7 @@ async def settings_command(client, message, query=False):
         f"• Preset: <code>{settings.get('video', {}).get('preset', '6')}</code>\n"
         f"• Resolution: <code>{res_display}</code>\n\n"
         f"<b>Audio:</b>\n"
-        f"• Bitrate: <code>{settings.get('audio', {}).get('bitrate', '128k')}</code>\n\n"
+        f"• Bitrate: <code>{settings.get('audio', {}).get('bitrat', '128k')}</code>\n\n"
         f"<b>Metadata:</b>\n"
         f"• Global Title: <code>{settings.get('metadata', {}).get('global', {}).get('title', 'N/A')}</code></blockquote>"
     )
@@ -398,7 +398,7 @@ async def edit_callback(client, callback_query: CallbackQuery):
 
     elif data == "edit_audio_bitrate":
         if "audio" not in settings: settings["audio"] = {}
-        settings["audio"]["bitrate"] = text
+        settings["audio"]["bitrat"] = text
         await update_user_settings(user_id, settings)
         await message.reply_text(f"✅ Audio Bitrate set to <code>{text}</code>")
 
@@ -557,7 +557,7 @@ async def edit_callback(client, callback_query: CallbackQuery):
              await message.reply_text("❌ <b>Invalid Bitrate!</b>\nFormat: 128k, 192k, etc.")
              return
         if "audio" not in settings: settings["audio"] = {}
-        settings["audio"]["bitrate"] = text
+        settings["audio"]["bitrat"] = text
         await update_user_settings(user_id, settings)
         await message.reply_text(f"✅ Audio Bitrate set to <code>{text}</code>")
 
