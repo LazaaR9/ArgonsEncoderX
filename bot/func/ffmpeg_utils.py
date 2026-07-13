@@ -307,7 +307,7 @@ def generate_ffmpeg_cmd(
         cmd.extend(["-preset", preset])
 
         # Audio (AAC for compatibility)
-        cmd.extend(["-c:a", "aac"])
+        cmd.extend(["-c:a", "libopus"])
         cmd.extend(["-b:a", audio_bitrate])
 
         # Subtitles (Copy for MKV)
