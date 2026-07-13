@@ -23,7 +23,7 @@ PORT = os.environ.get("PORT", "8030")
 # Database
 DB_URI = os.environ.get(
     "DATABASE_URL",
-    "mongodb+srv://zee:zee@cluster0.s5dgb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",  # Placeholder DB URI
+    "mongodb+srv://Ramzy:Ramzy@cluster0.od4yk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",  # Placeholder DB URI
 )
 DB_NAME = os.environ.get("DATABASE_NAME", "Cluster")
 
