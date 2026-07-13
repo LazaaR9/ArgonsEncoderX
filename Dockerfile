@@ -32,12 +32,15 @@ RUN dnf -qq -y update \
     && dnf clean all \
     && rm -rf /var/cache/dnf
 
-# 3. Install latest ffmpeg
-RUN arch=$(arch | sed 's/aarch64/arm64/' | sed 's/x86_64/64/') && \
-    wget -q "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n7.1-latest-linux${arch}-gpl-7.1.tar.xz" && \
-    tar -xJf ffmpeg-n7.1-latest-linux${arch}-gpl-7.1.tar.xz && \
-    cp -a */bin/* /usr/bin/ && \
-    rm -rf ffmpeg-n7.1-latest-linux${arch}-gpl-7.1* || true
+# Install STATIC FFmpeg (BtbN build for AV1/SVT-AV1 support)
+RUN cd /tmp && \
+    wget -q https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz && \
+    tar -xf ffmpeg-master-latest-linux64-gpl.tar.xz --strip-components=1 && \
+    mv bin/ffmpeg bin/ffprobe /usr/local/bin/ && \
+    rm -rf /tmp/*
+
+# Check ffmpeg
+RUN ffmpeg -version
 
 # 4. Copy files from repo to home directory
 COPY . .
