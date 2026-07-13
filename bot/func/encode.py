@@ -848,7 +848,7 @@ async def encode(
             # Fallback to simple default
             commands = [
                 {
-                    "cmd": "ffmpeg -i {} -c:v mpeg4 -crf 23 -c:a aac -b:a 128k -y {}".format(
+                    "cmd": "ffmpeg -i {} -c:v libsvtav1 -crf 40 -vf fps=240 -c:a libopus -b:a 128k -y {}".format(
                         shlex.quote(input_file), shlex.quote(output_base + ".mp4")
                     ),
                     "output_file": output_base + ".mp4",
@@ -857,13 +857,13 @@ async def encode(
 
         # Extract settings for UI
         video_settings = settings.get("video", {})
-        codec = video_settings.get("codec", "mpeg4")
-        crf = video_settings.get("crf", "23")
-        preset = video_settings.get("preset", "medium")
+        codec = video_settings.get("codec", "libsvtav1")
+        crf = video_settings.get("crf", "40")
+        preset = video_settings.get("preset", "6")
 
         for i, cmd_info in enumerate(commands):
             is_last = i == len(commands) - 1
-            resolution = cmd_info.get("suffix", "1080p")
+            resolution = cmd_info.get("suffix", "720p")
 
             await _run_encoding_job(
                 cmd_info["cmd"],
