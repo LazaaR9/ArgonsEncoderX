@@ -10,10 +10,10 @@ from bot.func.ffmpeg_utils import generate_ffmpeg_cmd
 def test_generate_ffmpeg_cmd():
     settings = {
         "video": {
-            "resolution": ["1080p"],
-            "codec": "libx264",
-            "crf": 23,
-            "preset": "medium"
+            "resolution": ["720p"],
+            "codec": "libsvtav1",
+            "crf": 40,
+            "preset": "6"
         }
     }
     input_file = "test_input.mp4"
@@ -30,10 +30,10 @@ from bot.func.ffmpeg_utils import generate_ffmpeg_cmd
 def test_generate_ffmpeg_cmd():
     settings = {
         "video": {
-            "resolution": ["1080p"],
-            "codec": "libx264",
-            "crf": 23,
-            "preset": "medium"
+            "resolution": ["720p"],
+            "codec": "libsvt-av1",
+            "crf": 46,
+            "preset": "6"
         }
     }
     input_file = "test_input.mp4"
