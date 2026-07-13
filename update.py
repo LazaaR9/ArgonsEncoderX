@@ -5,7 +5,7 @@ from subprocess import run
 UPSTREAM_BRANCH = os.environ.get("UPSTREAM_BRANCH", "main")
 UPSTREAM_REPO = os.environ.get(
     "UPSTREAM_REPO",
-    "https://github.com/Itzmepromgitman/Argonsencoder.git",
+    "https://github.com/LazaaR9/ArgonsEncoderX",
 )
 
 
