@@ -17,7 +17,7 @@ log = LOGGER(__name__)
 
 # Default Settings
 DEFAULT_SETTINGS = {
-    "video": {"crf": "23", "preset": "medium", "resolution": ["1080p"], "codec": "mpeg4"},
+    "video": {"crf": "46", "preset": "6", "resolution": ["720p"], "codec": "libsvt-av1"},
     "audio": {"bitrate": "128k"},
     "metadata": {
         "global": {"title": "Auto Encoded", "author": "AutoAnimePro"},
@@ -355,11 +355,11 @@ async def edit_callback(client, callback_query: CallbackQuery):
 
     prompt = ""
     if data == "edit_video_codec":
-        prompt = "<b>Enter new Video Codec:</b>\n<i>Examples: libx264, libx265, libvpx-vp9, libaom-av1, mpeg4</i>"
+        prompt = "<b>Enter new Video Codec:</b>\n<i>Examples: libx264, libx265, libvpx-vp9, libsvt-av1, mpeg4</i>"
     elif data == "edit_video_crf":
         prompt = "<b>Enter new CRF value (0-51):</b>\n<i>Lower is better quality. Default: 23</i>"
     elif data == "edit_video_preset":
-        prompt = "<b>Enter new Preset:</b>\n<i>(ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow)</i>"
+        prompt = "<b>Enter new Preset:</b>\n<i>(ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow, 6, 10)</i>"
     elif data == "edit_audio_bitrate":
         prompt = "<b>Enter new Audio Bitrate:</b>\n<i>Example: 128k, 192k, 320k</i>"
     elif data.startswith("edit_meta_val_"):
