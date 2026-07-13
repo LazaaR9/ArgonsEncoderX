@@ -1,36 +1,28 @@
-# Base Image
-FROM fedora:40
-
-# 1. Setup home directory, non interactive shell and timezone
-RUN mkdir -p /bot /tgenc && chmod 777 /bot
-WORKDIR /bot
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Africa/Lagos
-ENV TERM=xterm
 
-# 2. Install Dependencies (including git)
-RUN dnf -qq -y update \
-    && dnf -qq -y install \
-       git \
-       aria2 \
-       bash \
-       xz \
-       wget \
-       curl \
-       pv \
-       jq \
-       python3-pip \
-       mediainfo \
-       psmisc \
-       procps-ng \
-       qbittorrent-nox \
-    && if [ "$(arch)" = "aarch64" ]; then \
-         dnf -qq -y install gcc python3-devel; \
-       fi \
-    && python3 -m pip install --upgrade pip setuptools \
-    && dnf clean all \
-    && rm -rf /var/cache/dnf
+# Install required packages
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    git \
+    xz-utils \
+    tar \
+    python3 \
+    python3-pip \
+    python3-venv \
+    ca-certificates \
+    libass9 \
+    libfreetype6 \
+    libfontconfig1 \
+    libxcb1 \
+    libx11-6 \
+    libxext6 \
+    libxfixes3 \
+    libopus0 \
+    mediainfo \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install STATIC FFmpeg (BtbN build for AV1/SVT-AV1 support)
 RUN cd /tmp && \
@@ -42,16 +34,9 @@ RUN cd /tmp && \
 # Check ffmpeg
 RUN ffmpeg -version
 
-# 4. Copy files from repo to home directory
-COPY . .
+WORKDIR /app
+COPY . /app
 
-# 5. Install python3 requirements
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-# 6. cleanup for arm64
-RUN if [ "$(arch)" = "aarch64" ]; then \
-      dnf -qq -y history undo last; \
-    fi && dnf clean all
-
-# 7. Start bot
-CMD ["bash","start.sh"]
+CMD ["bash", "start.sh"]
