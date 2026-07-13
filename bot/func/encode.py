@@ -848,7 +848,7 @@ async def encode(
             # Fallback to simple default
             commands = [
                 {
-                    "cmd": "ffmpeg -i {} -c:v libsvtav1 -crf 40 -vf fps=240 -c:a libopus -b:a 128k -y {}".format(
+                    "cmd": "ffmpeg -i {} -c:v libsvtav1 -crf 40 -c:a libopus -b:a 48k -y {}".format(
                         shlex.quote(input_file), shlex.quote(output_base + ".mp4")
                     ),
                     "output_file": output_base + ".mp4",
