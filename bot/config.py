@@ -25,6 +25,6 @@ DB_URI = os.environ.get(
     "DATABASE_URL",
     "mongodb+srv://zee:zee@cluster0.s5dgb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",  # Placeholder DB URI
 )
-DB_NAME = os.environ.get("DATABASE_NAME", "argons")
+DB_NAME = os.environ.get("DATABASE_NAME", "Cluster")
 
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "50"))
