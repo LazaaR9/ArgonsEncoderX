@@ -75,9 +75,9 @@ async def settings_command(client, message, query=False):
     text = (
         f"<b>⚙️ User Settings</b>\n\n"
         f"<blockquote><b>Video:</b>\n"
-        f"• Codec: <code>{settings.get('video', {}).get('codec', 'mpeg4')}</code>\n"
-        f"• CRF: <code>{settings.get('video', {}).get('crf', '23')}</code>\n"
-        f"• Preset: <code>{settings.get('video', {}).get('preset', 'medium')}</code>\n"
+        f"• Codec: <code>{settings.get('video', {}).get('codec', 'libsvtav1')}</code>\n"
+        f"• CRF: <code>{settings.get('video', {}).get('crf', '46')}</code>\n"
+        f"• Preset: <code>{settings.get('video', {}).get('preset', '6')}</code>\n"
         f"• Resolution: <code>{res_display}</code>\n\n"
         f"<b>Audio:</b>\n"
         f"• Bitrate: <code>{settings.get('audio', {}).get('bitrate', '128k')}</code>\n\n"
@@ -326,7 +326,7 @@ async def edit_callback(client, callback_query: CallbackQuery):
     settings = await get_user_settings(user_id)
 
     if data == "edit_video_res":
-        current_res = settings.get("video", {}).get("resolution", ["1080p"])
+        current_res = settings.get("video", {}).get("resolution", ["720p"])
         if isinstance(current_res, str):
             current_res = [current_res]
 
@@ -436,7 +436,7 @@ async def toggle_res_callback(client, callback_query: CallbackQuery):
     if "video" not in settings:
         settings["video"] = {}
 
-    current_res = settings["video"].get("resolution", ["1080p"])
+    current_res = settings["video"].get("resolution", ["720p"])
     if isinstance(current_res, str):
         current_res = [current_res]
 
@@ -468,7 +468,7 @@ async def edit_callback(client, callback_query: CallbackQuery):
     settings = await get_user_settings(user_id)
 
     if data == "edit_video_res":
-        current_res = settings.get("video", {}).get("resolution", ["1080p"])
+        current_res = settings.get("video", {}).get("resolution", ["720p"])
         if isinstance(current_res, str):
             current_res = [current_res]
 
@@ -498,11 +498,11 @@ async def edit_callback(client, callback_query: CallbackQuery):
 
     prompt = ""
     if data == "edit_video_codec":
-        prompt = "<b>Enter new Video Codec:</b>\n<i>Examples: libx264, libx265, libvpx-vp9, libaom-av1, mpeg4</i>"
+        prompt = "<b>Enter new Video Codec:</b>\n<i>Examples: libx264, libx265, libvpx-vp9, libsvt-av1, mpeg4</i>"
     elif data == "edit_video_crf":
-        prompt = "<b>Enter new CRF value (0-51):</b>\n<i>Lower is better quality. Default: 23</i>"
+        prompt = "<b>Enter new CRF value (0-51):</b>\n<i>Lower is better quality. Default: 46</i>"
     elif data == "edit_video_preset":
-        prompt = "<b>Enter new Preset:</b>\n<i>(ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow)</i>"
+        prompt = "<b>Enter new Preset:</b>\n<i>(ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow, 6, 10)</i>"
     elif data == "edit_audio_bitrate":
         prompt = "<b>Enter new Audio Bitrate:</b>\n<i>Example: 128k, 192k, 320k</i>"
     elif data.startswith("edit_meta_val_"):
@@ -543,7 +543,7 @@ async def edit_callback(client, callback_query: CallbackQuery):
         await message.reply_text(f"✅ CRF set to <code>{text}</code>")
 
     elif data == "edit_video_preset":
-        valid_presets = ["ultrafast", "superfast", "veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow"]
+        valid_presets = ["ultrafast", "superfast", "veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow", "6", "10"]
         if text.lower() not in valid_presets:
              await message.reply_text(f"❌ <b>Invalid Preset!</b>\nChoose from: {', '.join(valid_presets)}")
              return
@@ -595,7 +595,7 @@ async def toggle_res_callback(client, callback_query: CallbackQuery):
     if "video" not in settings:
         settings["video"] = {}
 
-    current_res = settings["video"].get("resolution", ["1080p"])
+    current_res = settings["video"].get("resolution", ["720p"])
     if isinstance(current_res, str):
         current_res = [current_res]
 
