@@ -229,16 +229,16 @@ def generate_ffmpeg_cmd(
     # Watermark Filter
     wm_filter = generate_watermark_filter(settings)
 
-    crf = video_settings.get("crf", "23")
-    preset = video_settings.get("preset", "medium")
-    codec = video_settings.get("codec", "mpeg4")
-    resolutions = video_settings.get("resolution", ["1080p"])
+    crf = video_settings.get("crf", "40")
+    preset = video_settings.get("preset", "6")
+    codec = video_settings.get("codec", "libsvtav1")
+    resolutions = video_settings.get("resolution", ["720p"])
 
     # Ensure resolutions is a list
     if isinstance(resolutions, str):
         resolutions = [resolutions]
 
-    audio_bitrate = audio_settings.get("bitrate", "128k")
+    audio_bitrate = audio_settings.get("bitrat", "128k")
     title = meta_settings.get("title", "")
     author = meta_settings.get("author", "")
 
